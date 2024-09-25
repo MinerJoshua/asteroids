@@ -4,8 +4,7 @@ from constants import *
 
 class Player(CircleShape):
 
-    containers = ();
-    
+
     def __init__(self,x:int,y:int):
         super().__init__(x,y,PLAYER_RADIUS)
         self.rotation:int = 0
