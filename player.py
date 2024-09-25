@@ -3,6 +3,8 @@ from circleshape import CircleShape
 from constants import *
 
 class Player(CircleShape):
+
+    containers = ();
     
     def __init__(self,x:int,y:int):
         super().__init__(x,y,PLAYER_RADIUS)
@@ -25,7 +27,15 @@ class Player(CircleShape):
     def update(self, delta_time):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_a]:
-            self.rotate(delta_time)
         if keys[pygame.K_d]:
+            self.rotate(delta_time)
+        if keys[pygame.K_a]:
             self.rotate(delta_time * -1)
+        if keys[pygame.K_w]:
+            self.move(delta_time)
+        if keys[pygame.K_s]:
+            self.move(delta_time * -1)
+
+    def move(self, delta_time):
+        forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        self.position += forward * PLAYER_SPEED * delta_time
